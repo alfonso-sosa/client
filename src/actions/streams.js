@@ -45,5 +45,7 @@ export const deleteStream = id => dispatch => {
   dispatch({
     type: DELETE_STREAM.ACTION,
     payload: streams.delete(`/streams/${id}`)
+  }).then(_ => {
+    history.push('/');
   });
 }
