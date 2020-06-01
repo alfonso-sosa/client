@@ -1,7 +1,40 @@
 import React from 'react';
+import {connect} from 'react-redux';
+import {isNullOrUndefined} from 'util';
+import {fetchStream} from '../../actions/streams';
 
-const StreamShow = () => {
-  return <div>StreamShow</div>;
+
+class StreamShow extends React.Component {
+
+  componentDidMount() {
+    const {fetchStream, match} = this.props;
+    fetchStream(match.params.id);
+  }
+
+  render() {
+    const {stream} = this.props;
+    if (isNullOrUndefined(stream)){
+      return <div>Loading...</div>
+    }
+    const {title, description} = this.props.stream;
+    return (
+      <div>
+        <h1>{title}</h1>
+        <h3>{description}</h3>
+      </div>
+    );
+  }
 }
 
-export default StreamShow;
+const mapStateToProps = ({streams}, ownProps) => {
+  const id = ownProps.match.params.id;
+  return {
+    stream: isNullOrUndefined(streams.list) ? null : streams.list[id]
+  };
+}
+
+const actionCreators = {
+  fetchStream
+}
+
+export default connect(mapStateToProps, actionCreators)(StreamShow);
