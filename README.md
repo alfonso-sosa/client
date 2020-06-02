@@ -1,4 +1,4 @@
-CRUD interface for a stream site using React, ReactRouter and Redux
+## CRUD interface for a stream site using React, ReactRouter and Redux
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
